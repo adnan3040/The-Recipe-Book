@@ -1,0 +1,28 @@
+{
+  "name": "login",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.9",
+    "express": "^4.19.2",
+    "express.js": "^1.0.0",
+    "hbs": "^4.2.0",
+    "knex": "^3.1.0",
+    "mongodb": "^6.5.0",
+    "mongoose": "^8.3.2",
+    "nodemon": "^3.1.0",
+    "path": "^0.12.7",
+    "pd": "^0.8.1"
+  },
+  "devDependencies": {
+    "node-dev": "^8.0.0"
+  }
+}

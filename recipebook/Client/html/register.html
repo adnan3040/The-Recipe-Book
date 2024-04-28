@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<!-- Created By CodingLab - www.codinglabweb.com -->
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Form</title>
+  <link rel="stylesheet" href="../Stylesheet/register.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <div class="container">
+    <div class="title">Registration</div>
+    <div class="content">
+      <form id="registrationForm" method="post">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Full Name</span>
+            <input type="text" id="fullName" placeholder="Enter your name" required>
+          </div>          
+          <div class="input-box">
+            <span class="details">Username</span>
+            <input type="text" id="username" placeholder="Enter your username" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input type="text" id="email" placeholder="Enter your email" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Phone Number</span>
+            <input type="text" id="phoneNumber" placeholder="Enter your number" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Password</span>
+            <input type="text" id="password" placeholder="Enter your password" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Confirm Password</span>
+            <input type="text" id="confirmPassword" placeholder="Confirm your password" required>
+          </div>
+        </div>
+        <div class="gender-details">
+          <input type="radio" name="gender" value="Male" id="dot-1">
+          <input type="radio" name="gender" value="Female" id="dot-2">
+          <input type="radio" name="gender" value="Prefer not to say" id="dot-3">
+          <span class="gender-title">Gender</span>
+          <div class="category">
+            <label for="dot-1">
+              <span class="dot one"></span>
+              <span class="gender">Male</span>
+            </label>
+            <label for="dot-2">
+              <span class="dot two"></span>
+              <span class="gender">Female</span>
+            </label>
+            <label for="dot-3">
+              <span class="dot three"></span>
+              <span class="gender">Prefer not to say</span>
+            </label>
+          </div>
+        </div>
+        <div class="button">
+          <input type="submit" value="Register">
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const registrationForm = document.getElementById('registrationForm');
+  
+      registrationForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+  
+        // Get form input values
+        const fullName = document.getElementById('fullName').value;
+        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
+        const phoneNumber = document.getElementById('phoneNumber').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const gender = document.querySelector('input[name="gender"]:checked').value;
+  
+        // Validate password and confirm password
+        if (password !== confirmPassword) {
+          console.error('Password and confirm password do not match');
+          return;
+        }
+  
+        // Create newUser object
+        const newUser = {
+          fullName: fullName,
+          username: username,
+          email: email,
+          phoneNumber: phoneNumber,
+          password: password,
+          gender: gender
+        };
+  
+        try {
+          const response = await fetch('http://localhost:5000/register', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newUser)
+          });
+  
+          if (response.ok) {
+            const data = await response.json();
+            console.log(data.message); // Log registration message
+  
+            // Redirect to login page
+            console.log("hello");
+            const redirectTo = '../html/Login.html';
+            window.location.href = redirectTo;
+          } else {
+            console.error('Registration failed');
+          }
+        } catch (error) {
+          console.error('Error during registration:', error);
+        }
+      });
+    });
+  </script>
+  
+</body>
+
+</html>
